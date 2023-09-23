@@ -1,0 +1,18 @@
+<!-- <p>{{ data | async }}</p> -->
+<div>{{ data.username }}</div>
+<form [formGroup]="logInForm" action="" method="post" (ngSubmit)="logIn()">
+  <input
+    type="text"
+    name="username"
+    placeholder="Username"
+    formControlName="username"
+  />
+  <input
+    type="password"
+    name="password"
+    placeholder="Password"
+    formControlName="password"
+  />
+  <input type="submit" name="login" value="Log In" />
+</form>
+<div>{{ data.session_logs }}</div>
