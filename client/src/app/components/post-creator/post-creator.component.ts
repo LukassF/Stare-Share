@@ -17,6 +17,7 @@ export class PostCreatorComponent implements OnDestroy {
   subscription: Subscription | undefined;
   createPostForm: FormGroup = this.formB.group({
     file: '',
+    desc: '',
   });
 
   constructor(
@@ -40,21 +41,28 @@ export class PostCreatorComponent implements OnDestroy {
     reader.readAsDataURL(file);
 
     reader.onload = () => {
+      // console.log(reader.result);
       this.imageBase64 = reader.result ? (reader.result as string) : '';
     };
   }
 
   submitForm() {
-    if (!this.imageBase64 || !this.currentUserS.currentUser.value) return;
+    if (
+      !this.imageBase64 ||
+      !this.currentUserS.currentUser.value ||
+      !this.createPostForm.value.desc
+    )
+      return;
 
     this.subscription = this.createpostS
       .uploadImage(
         this.imageBase64,
-        'wehiwe',
+        this.createPostForm.value.desc,
         this.currentUserS.currentUser.value.id
       )
       .subscribe({
-        next: (res) => console.log(res),
+        next: (res) =>
+          res.success ? window.location.reload() : console.log(res.error),
         error: (err) => console.log(err),
       });
   }

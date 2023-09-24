@@ -1,6 +1,6 @@
 <?php
 
-class ImageUpload
+class CreatePost
 {
     private $folderpath;
     private $postdata;
@@ -10,7 +10,7 @@ class ImageUpload
     {
         $this->folderpath = $folderpath;
         $this->postdata = $postdata;
-        $this->imageModel = new ImageModel();
+        $this->imageModel = new CreatePostModel();
     }
 
     public function uploadImage()
@@ -26,15 +26,16 @@ class ImageUpload
             foreach ($uploads as $uploaded) {
                 if (file_get_contents("uploads/$uploaded") === $image_base64) {
                     $result['file'] = "uploads/$uploaded";
-                    $this->imageModel->insertPost("uploads/$uploaded", $this->postdata->desc, $this->postdata->user_id);
-                    $result['success'] = 'Image uploaded successfully!';
+                    if ($this->imageModel->insertPost("uploads/$uploaded", $this->postdata->desc, $this->postdata->user_id))
+                        $result['success'] = 'Image uploaded successfully!';
+                    else $result['error'] = 'Failed to upload image. Try again!';
 
                     return $result;
                 }
             }
 
-            if (file_put_contents($file, $image_base64)) {
-                $this->imageModel->insertPost($file, $this->postdata->desc, $this->postdata->user_id);
+            if (file_put_contents($file, $image_base64) &&  $this->imageModel->insertPost($file, $this->postdata->desc, $this->postdata->user_id)) {
+
                 $result['success'] = 'Image uploaded successfully!';
             } else $result['error'] = 'Failed to upload image. Try again!';
 
@@ -44,5 +45,9 @@ class ImageUpload
         }
 
         return $result;
+    }
+
+    public function likePost(int $post_id)
+    {
     }
 }

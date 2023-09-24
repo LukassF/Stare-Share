@@ -1,6 +1,6 @@
 <?php
 
-class ImageModel extends DBH
+class CreatePostModel extends DBH
 {
     public function insertPost(string $image, string $desc, int $user_id)
     {
@@ -11,8 +11,9 @@ class ImageModel extends DBH
             $stmt->bindParam(":desc", $desc);
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
+            return true;
         } catch (PDOException $e) {
-            return $e;
+            return false;
         }
     }
 }

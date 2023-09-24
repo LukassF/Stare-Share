@@ -12,6 +12,11 @@ import { SignupService } from './services/signup/signup.service';
 import { PostCreatorComponent } from './components/post-creator/post-creator.component';
 import { CreatepostService } from './services/createPost/createpost.service';
 import { CurrentuserService } from './services/currentUser/currentuser.service';
+import { FeedComponent } from './components/feed/feed.component';
+import { GetpostsService } from './services/getPosts/getposts.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -19,18 +24,23 @@ import { CurrentuserService } from './services/currentUser/currentuser.service';
     LoginComponent,
     SignupComponent,
     PostCreatorComponent,
+    FeedComponent,
+    UserProfileComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    MatSnackBarModule,
   ],
   providers: [
     LoginService,
     SignupService,
     CreatepostService,
     CurrentuserService,
+    GetpostsService,
   ],
   bootstrap: [AppComponent],
 })

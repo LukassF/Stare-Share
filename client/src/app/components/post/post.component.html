@@ -1,0 +1,6 @@
+<div *ngIf="post">
+  {{ post.description }}
+  Likes{{ post.likes }} Comments{{ post.comments }}
+  <img [src]="post.base64" width="100px" />
+  <button (click)="likePost()">Like post</button>
+</div>

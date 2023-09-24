@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const BACKEND_URL = 'http://localhost/angularXphp/api/';
+import { BACKEND_URL } from '../signup/signup.service';
 
 @Injectable({
   providedIn: 'root',

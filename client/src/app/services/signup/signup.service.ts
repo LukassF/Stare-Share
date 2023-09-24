@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const BACKEND_URL = 'http://localhost/angularXphp/api/';
+export const BACKEND_URL = 'http://localhost/angularXphp/api/';
 
 @Injectable({
   providedIn: 'root',

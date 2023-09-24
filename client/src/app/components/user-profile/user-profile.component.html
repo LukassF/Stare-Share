@@ -1,0 +1,7 @@
+<p>user-profile works!</p>
+<div *ngIf="userPosts$">
+  <div *ngFor="let post of userPosts$ | async">
+    {{ post.description }}
+    <img [src]="post.base64" width="100px" />
+  </div>
+</div>

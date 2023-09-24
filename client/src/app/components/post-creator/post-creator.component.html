@@ -5,6 +5,13 @@
   [formGroup]="createPostForm"
 >
   <input type="file" (change)="onFileChange($event)" formControlName="file" />
-  <button [disabled]="!imageBase64">Submit</button>
+  <textarea
+    type="text"
+    placeholder="Description"
+    formControlName="desc"
+  ></textarea>
+  <button [disabled]="!imageBase64 || !createPostForm.value.desc">
+    Submit
+  </button>
 </form>
 <div>{{ error }}</div>
