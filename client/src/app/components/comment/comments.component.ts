@@ -1,8 +1,16 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { CurrentuserService } from 'src/app/services/currentUser/currentuser.service';
+import pusherJs from 'pusher-js';
 
 @Component({
   selector: 'app-comments',
@@ -10,10 +18,13 @@ import { CurrentuserService } from 'src/app/services/currentUser/currentuser.ser
   styleUrls: ['./comments.component.scss'],
 })
 export class CommentsComponent implements OnInit, OnDestroy {
-  postComments: Array<Comment> | undefined;
+  @Input() post: Post | undefined;
+  @Output() numOfComments = new EventEmitter();
+  pusherChannel: any;
+  postComments: Array<Comment> = [];
   subscription: Subscription | undefined;
   sendCommentSubs: Subscription | undefined;
-  @Input() post: Post | undefined;
+
   commentForm: FormGroup = this.formB.group({
     comment: ['', Validators.required],
   });
@@ -26,10 +37,20 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getComments();
+
+    //initializing pusher for websocket connection
+    var pusher = new pusherJs('5f08c4ab1ae08966f7f9', {
+      cluster: 'eu',
+    });
+
+    this.pusherChannel = pusher.subscribe('comment-section');
+    this.pusherChannel.bind('new-comment', (lastComment: any) => {
+      this.postComments.push(lastComment);
+      this.numOfComments.emit(this.postComments.length);
+    });
   }
 
   sendComment() {
-    console.log(this.commentForm);
     if (
       !this.commentForm.value ||
       !this.currentUserS.currentUser.value ||
@@ -44,6 +65,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
         this.post.id
       )
       .subscribe((data) => console.log(data));
+
+    this.commentForm.reset();
   }
 
   getComments() {
@@ -59,5 +82,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();
     if (this.sendCommentSubs) this.sendCommentSubs.unsubscribe();
+    if (this.pusherChannel) this.pusherChannel.unsubscribe('comment-section');
   }
 }

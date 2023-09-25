@@ -25,6 +25,12 @@ export class CurrentuserService implements OnDestroy {
     this.createPostS.setLikedPosts();
   }
 
+  logOut() {
+    window.localStorage.removeItem('currentUser');
+    this.currentUser.next(null);
+    this.createPostS.setLikedPosts();
+  }
+
   getUserInfo() {
     if (!this.currentUser.value) return;
     this.subscription = this.httpClient

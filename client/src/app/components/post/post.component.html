@@ -1,6 +1,6 @@
 <div *ngIf="post">
   {{ post.description }}
-  Likes{{ post.likes }} Comments{{ post.comments }}
+  Likes{{ post.likes }} Comments{{ commentQuantity }}
   <img [src]="post.base64" width="100px" />
   <button
     (click)="likePost()"
@@ -10,7 +10,13 @@
     Like post
   </button>
 
-  <button (click)="openComments()">Comment</button>
+  <button (click)="openComments()" [disabled]="!currentUserS.currentUser.value">
+    Comment
+  </button>
 
-  <app-comments [post]="post" *ngIf="showComments"></app-comments>
+  <app-comments
+    [post]="post"
+    *ngIf="showComments"
+    (numOfComments)="updateCommentQuantity($event)"
+  ></app-comments>
 </div>

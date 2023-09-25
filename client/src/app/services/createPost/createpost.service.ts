@@ -9,7 +9,9 @@ import { CurrentuserService } from '../currentUser/currentuser.service';
 })
 export class CreatepostService implements OnDestroy {
   likedPosts = new BehaviorSubject<string[] | null>(
-    JSON.parse(window.localStorage.getItem('currentUser') || 'null').liked
+    window.localStorage.getItem('currentUser')
+      ? JSON.parse(window.localStorage.getItem('currentUser') as string).liked
+      : null
   );
   subscription: Subscription | undefined;
 
@@ -17,7 +19,9 @@ export class CreatepostService implements OnDestroy {
 
   setLikedPosts() {
     this.likedPosts.next(
-      JSON.parse(window.localStorage.getItem('currentUser') || 'null').liked
+      window.localStorage.getItem('currentUser')
+        ? JSON.parse(window.localStorage.getItem('currentUser') as string).liked
+        : null
     );
   }
 

@@ -1,10 +1,10 @@
 import { CurrentuserService } from './../../services/currentUser/currentuser.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
-import { CreatepostService } from 'src/app/services/createPost/createpost.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,8 @@ export class LoginComponent implements OnDestroy {
   constructor(
     private loginS: LoginService,
     private formBuilder: FormBuilder,
-    private currentUserS: CurrentuserService
+    private currentUserS: CurrentuserService,
+    private toastr: ToastrService
   ) {
     this.logInForm = this.formBuilder.group({
       username: ['', Validators.required],
@@ -38,12 +39,24 @@ export class LoginComponent implements OnDestroy {
     this.subscription = this.loginS
       .logIn(this.username, this.password)
       .subscribe((item) => {
-        if (item.session_logs) this.data.session_logs = item.session_logs;
+        if (item.session_logs === 'Login successfull!')
+          this.toastr.success('Login successfull!');
+        else if (
+          item.session_logs &&
+          item.session_logs !== 'Login successfull!'
+        )
+          this.toastr.error(item.session_logs);
 
         delete item.session_logs;
         console.log(item);
         this.currentUserS.changeCurrentUser(item);
+        this.logInForm.reset();
       });
+  }
+
+  logOut() {
+    this.currentUserS.logOut();
+    this.toastr.success('Logged out!');
   }
 
   ngOnDestroy(): void {

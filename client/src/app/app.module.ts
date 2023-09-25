@@ -21,6 +21,9 @@ import { LikedpostsComponent } from './components/likedposts/likedposts.componen
 
 import { CommentService } from './services/comment/comment.service';
 import { CommentsComponent } from './components/comment/comments.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -35,11 +38,14 @@ import { CommentsComponent } from './components/comment/comments.component';
     CommentsComponent,
   ],
   imports: [
+    CommonModule,
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     LoginService,

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CreatepostService } from 'src/app/services/createPost/createpost.service';
 import { CurrentuserService } from 'src/app/services/currentUser/currentuser.service';
 
@@ -7,14 +7,19 @@ import { CurrentuserService } from 'src/app/services/currentUser/currentuser.ser
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss'],
 })
-export class PostComponent {
+export class PostComponent implements OnChanges {
   @Input() post: Post | undefined;
   showComments: boolean = false;
+  commentQuantity: number | undefined;
 
   constructor(
     private createPostS: CreatepostService,
-    private currentUserS: CurrentuserService
+    public currentUserS: CurrentuserService
   ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.commentQuantity = this.post?.comments;
+  }
 
   get isMine() {
     if (this.currentUserS.currentUser.value && this.post)
@@ -38,6 +43,10 @@ export class PostComponent {
       this.post.id,
       this.currentUserS.currentUser.value.id
     );
+  }
+
+  updateCommentQuantity(e: any) {
+    this.commentQuantity = e;
   }
 
   openComments() {
