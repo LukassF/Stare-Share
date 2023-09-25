@@ -47,7 +47,13 @@ class CreatePost
         return $result;
     }
 
-    public function likePost(int $post_id)
+    public function likePost(int $post_id, int $user_id)
     {
+        return $this->imageModel->updateLikeQuantity($post_id, $user_id);
+    }
+
+    public function dislikePost(int $post_id, int $user_id)
+    {
+        return $this->imageModel->reduceLikeQuantity($post_id, $user_id);
     }
 }

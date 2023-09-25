@@ -41,6 +41,7 @@ export class LoginComponent implements OnDestroy {
         if (item.session_logs) this.data.session_logs = item.session_logs;
 
         delete item.session_logs;
+        console.log(item);
         this.currentUserS.changeCurrentUser(item);
       });
   }

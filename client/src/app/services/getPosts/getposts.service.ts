@@ -16,6 +16,17 @@ export class GetpostsService {
 
   getPostsByUserId(user_id: number): Observable<Post[]> {
     //@ts-ignore
-    return this.httpClient.post(BACKEND_URL + 'post/getposts.php', { user_id });
+    return this.httpClient.post(BACKEND_URL + 'post/getposts.php', {
+      user_id,
+      liked: false,
+    });
+  }
+
+  getLikedPosts(user_id: number): Observable<Post[]> {
+    //@ts-ignore
+    return this.httpClient.post(BACKEND_URL + 'post/getposts.php', {
+      user_id,
+      liked: true,
+    });
   }
 }

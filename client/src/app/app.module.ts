@@ -17,6 +17,10 @@ import { GetpostsService } from './services/getPosts/getposts.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { PostComponent } from './components/post/post.component';
+import { LikedpostsComponent } from './components/likedposts/likedposts.component';
+
+import { CommentService } from './services/comment/comment.service';
+import { CommentsComponent } from './components/comment/comments.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,8 @@ import { PostComponent } from './components/post/post.component';
     FeedComponent,
     UserProfileComponent,
     PostComponent,
+    LikedpostsComponent,
+    CommentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,6 +47,7 @@ import { PostComponent } from './components/post/post.component';
     CreatepostService,
     CurrentuserService,
     GetpostsService,
+    CommentService,
   ],
   bootstrap: [AppComponent],
 })

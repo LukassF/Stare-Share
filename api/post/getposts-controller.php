@@ -13,7 +13,9 @@ class GetPostsContr
     {
 
         $arr = $this->postsModel->fetchAll();
-        $resultArr = $this->getBase64($arr);
+        if ($arr)
+            $resultArr = $this->getBase64($arr);
+        else $resultArr = [];
 
         return $resultArr;
     }
@@ -21,8 +23,21 @@ class GetPostsContr
     public function getUsersPosts(int $user_id)
     {
         $arr = $this->postsModel->fetchUserPosts($user_id);
-        $userPosts = $this->getBase64($arr);
+        if ($arr)
+            $userPosts = $this->getBase64($arr);
+        else $userPosts = [];
         return $userPosts;
+    }
+
+    public function getLikedPosts(int $user_id)
+    {
+
+        $arr = $this->postsModel->fetchLikedPosts($user_id);
+        if ($arr)
+            $likedPosts = $this->getBase64($arr);
+        else $likedPosts = [];
+
+        return $likedPosts;
     }
 
     private function getBase64(array $array)

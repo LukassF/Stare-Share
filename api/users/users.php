@@ -9,6 +9,15 @@ require_once './users-model.php';
 require_once './users-controller.php';
 
 $usersCont = new UsersCont();
-$result = $usersCont->getAllUsers();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $postdata = json_decode(file_get_contents("php://input"));
+    $result = $usersCont->getUserInfo($postdata->user_id);
+} else {
+    $result = $usersCont->getAllUsers();
+}
+
+
+
 
 echo json_encode($result);

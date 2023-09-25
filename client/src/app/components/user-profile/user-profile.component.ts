@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CreatepostService } from 'src/app/services/createPost/createpost.service';
 import { GetpostsService } from 'src/app/services/getPosts/getposts.service';
 
 @Component({
@@ -14,8 +15,13 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private getPostsS: GetpostsService
+    private getPostsS: GetpostsService,
+    private createPostS: CreatepostService
   ) {}
+
+  get liked() {
+    return this.createPostS.likedPosts.value;
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((value) => {

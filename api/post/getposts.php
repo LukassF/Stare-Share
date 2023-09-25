@@ -11,7 +11,9 @@ $postsContr = new GetPostsContr();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postdata = json_decode(file_get_contents("php://input"));
 
-    if ($postdata->user_id)
+    if ($postdata->liked && $postdata->user_id)
+        $result = $postsContr->getLikedPosts($postdata->user_id);
+    elseif (!$postdata->liked && $postdata->user_id)
         $result = $postsContr->getUsersPosts($postdata->user_id);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = $postsContr->getAllPosts();

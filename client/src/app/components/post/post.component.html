@@ -2,5 +2,15 @@
   {{ post.description }}
   Likes{{ post.likes }} Comments{{ post.comments }}
   <img [src]="post.base64" width="100px" />
-  <button (click)="likePost()">Like post</button>
+  <button
+    (click)="likePost()"
+    [disabled]="isMine"
+    [style.backgroundColor]="isLiked ? 'red' : 'grey'"
+  >
+    Like post
+  </button>
+
+  <button (click)="openComments()">Comment</button>
+
+  <app-comments [post]="post" *ngIf="showComments"></app-comments>
 </div>

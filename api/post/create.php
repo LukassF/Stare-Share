@@ -18,7 +18,10 @@ $imageContr = new CreatePost($folderPath, $postdata);
 
 if (!empty($postdata->image))
     $result = $imageContr->uploadImage();
-elseif (!empty($postdata->post_id))
-    $result = 'hi';
+elseif (!empty($postdata->post_id)) {
+    if ($postdata->like) $result = $imageContr->likePost($postdata->post_id, $postdata->user_id);
+    else $result = $imageContr->dislikePost($postdata->post_id, $postdata->user_id);
+}
+
 
 echo json_encode($result);

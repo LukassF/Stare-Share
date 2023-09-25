@@ -1,0 +1,6 @@
+<button (click)="openLiked()">show liked</button>
+<div *ngIf="likedPosts$">
+  <app-post *ngFor="let post of likedPosts$ | async" [post]="post"></app-post>
+</div>
+
+<div *ngElse>No liked posts yet</div>

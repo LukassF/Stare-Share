@@ -12,9 +12,12 @@ class UsersCont
     public function getAllUsers()
     {
         $result = $this->usersModel->fetchAllUsers();
+        return $result;
+    }
 
-        if ($result)
-            return $result;
-        else return false;
+    public function getUserInfo(int $user_id)
+    {
+        $result = $this->usersModel->fetchUserInfo($user_id);
+        return $result;
     }
 }

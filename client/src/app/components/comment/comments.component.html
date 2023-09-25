@@ -1,0 +1,13 @@
+<div *ngIf="postComments">
+  <div *ngFor="let comment of postComments">{{ comment.content }}</div>
+</div>
+
+<form
+  action=""
+  method="post"
+  [formGroup]="commentForm"
+  (ngSubmit)="sendComment()"
+>
+  <input type="text" placeholder="Comment" formControlName="comment" />
+  <button [disabled]="this.commentForm.status === 'INVALID'">Send</button>
+</form>

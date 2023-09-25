@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $echos['username'] = $username;
         $echos['email'] = $result['EMAIL'];
         $echos['id'] = $result['ID'];
+        $echos['liked'] = $result['LIKED'];
+        $echos['register_date'] = $result['REGISTER_DATE'];
     }
 
     echo json_encode($echos);
