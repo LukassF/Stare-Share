@@ -1,4 +1,12 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { CreatepostService } from 'src/app/services/createPost/createpost.service';
 import { CurrentuserService } from 'src/app/services/currentUser/currentuser.service';
 
@@ -9,12 +17,15 @@ import { CurrentuserService } from 'src/app/services/currentUser/currentuser.ser
 })
 export class PostComponent implements OnChanges {
   @Input() post: Post | undefined;
+
   showComments: boolean = false;
+  showMore: boolean = false;
   commentQuantity: number | undefined;
 
   constructor(
     private createPostS: CreatepostService,
-    public currentUserS: CurrentuserService
+    public currentUserS: CurrentuserService,
+    private router: Router
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -51,5 +62,13 @@ export class PostComponent implements OnChanges {
 
   openComments() {
     this.showComments = !this.showComments;
+  }
+
+  expandDescription(): void {
+    this.showMore = !this.showMore;
+  }
+
+  navigateTo() {
+    this.router.navigate([`users/${this.post?.user_id}`]);
   }
 }

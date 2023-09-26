@@ -24,6 +24,9 @@ import { CommentsComponent } from './components/comment/comments.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { AsidemenuComponent } from './components/asidemenu/asidemenu.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MasonryPipe } from './pipes/masonry.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,8 @@ import { CommonModule } from '@angular/common';
     PostComponent,
     LikedpostsComponent,
     CommentsComponent,
+    AsidemenuComponent,
+    MasonryPipe,
   ],
   imports: [
     CommonModule,
@@ -45,6 +50,7 @@ import { CommonModule } from '@angular/common';
     HttpClientModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    MatIconModule,
     ToastrModule.forRoot(),
   ],
   providers: [

@@ -4,9 +4,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { FeedComponent } from './components/feed/feed.component';
 
 const routes: Routes = [
-  { path: '', component: FeedComponent },
+  { path: 'home', component: FeedComponent },
   { path: 'users/:id', component: UserProfileComponent },
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

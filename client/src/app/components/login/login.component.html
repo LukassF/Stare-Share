@@ -1,18 +1,51 @@
 <!-- <p>{{ data | async }}</p> -->
-<div>{{ data.username }}</div>
-<form [formGroup]="logInForm" action="" method="post" (ngSubmit)="logIn()">
-  <input
-    type="text"
-    name="username"
-    placeholder="Username"
-    formControlName="username"
-  />
-  <input
-    type="password"
-    name="password"
-    placeholder="Password"
-    formControlName="password"
-  />
-  <input type="submit" name="login" value="Log In" />
-</form>
-<button (click)="logOut()">Log out</button>
+<!-- <div>{{ data.username }}</div> -->
+<article class="login-background" (click)="hideLogInBox($event)">
+  <div @fadeInOut class="login-box">
+    <button (click)="hideLogInBox()"><i class="fa fa-close"></i></button>
+
+    <section>
+      <h1>Log In below</h1>
+      <form
+        autocomplete="off"
+        [formGroup]="logInForm"
+        action=""
+        method="post"
+        (ngSubmit)="logIn()"
+      >
+        <div [tabIndex]="0">
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            required
+            (input)="checkInputs($event)"
+          />
+          <label for="username">Username</label>
+        </div>
+        <div [tabIndex]="0">
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            required
+            (input)="checkInputs($event)"
+          />
+          <label for="password">Password</label>
+        </div>
+        <input type="submit" name="login" value="Log In" />
+      </form>
+
+      <div class="sign-up-redirect">
+        <h4>Don&apos;t have an account?</h4>
+        <a (click)="goToSignUp()">Sign Up</a>
+      </div>
+
+      <!-- <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Excepturi
+        ullam quod dignissimos delectus hic placeat iusto eum ut non magni illo
+        animi in, repellendus doloremque nemo quae laborum officia! Quam!
+      </p> -->
+    </section>
+  </div>
+</article>

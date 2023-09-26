@@ -1,17 +1,36 @@
-<form
-  action=""
-  method="post"
-  (submit)="submitForm()"
-  [formGroup]="createPostForm"
->
-  <input type="file" (change)="onFileChange($event)" formControlName="file" />
-  <textarea
-    type="text"
-    placeholder="Description"
-    formControlName="desc"
-  ></textarea>
-  <button [disabled]="!imageBase64 || !createPostForm.value.desc">
-    Submit
-  </button>
-</form>
-<div>{{ error }}</div>
+<div class="post-box" *ngIf="userInitial">
+  <h3>Something on your mind?</h3>
+  <hr />
+  <form
+    action=""
+    method="post"
+    (submit)="submitForm()"
+    [formGroup]="createPostForm"
+    autocomplete="off"
+  >
+    <div class="inputs">
+      <span>{{ userInitial }}</span>
+      <input
+        type="text"
+        id="description"
+        placeholder="Share it!"
+        formControlName="desc"
+      />
+      <input
+        type="file"
+        id="file"
+        (change)="onFileChange($event)"
+        formControlName="file"
+      />
+      <button type="button" (click)="openFileInput()">
+        <i class="fa-solid fa-image"></i>
+      </button>
+    </div>
+    <button *ngIf="imageBase64 && createPostForm.value.desc" id="submit">
+      Post
+    </button>
+  </form>
+  <div class="image-preview" *ngIf="imageBase64" @slideDown>
+    <img [src]="imageBase64" />
+  </div>
+</div>

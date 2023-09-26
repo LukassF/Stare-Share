@@ -1,0 +1,123 @@
+@use "../../../styles.scss" as *;
+
+aside {
+  padding: 60px 20px;
+  height: calc(100% - 120px);
+  //   min-height: 100%;
+  background-color: rgb(247, 247, 247);
+  box-shadow: 22px 26px 34px -38px rgb(166, 166, 167);
+  @include flex(column, space-between, center);
+
+  @media screen and (max-width: 750px) {
+    @include flex(row, flex, center);
+    height: auto;
+    order: 1;
+    padding: 0px 20px;
+  }
+
+  .logo-container {
+    @include flex(row, center, center);
+
+    img {
+      transform: rotate(10deg);
+    }
+
+    @media screen and (max-width: 750px) {
+      display: none;
+    }
+    // background-color: red;
+  }
+
+  nav {
+    min-height: 80%;
+    // height: calc(100% - 120px);
+    padding: 20px 0px;
+    // background-color: red;
+    @include flex(column, space-between, center);
+    width: 100%;
+
+    @media screen and (max-width: 750px) {
+      @include flex(row, center, center);
+      gap: 20px;
+    }
+
+    @media screen and (max-width: 450px) {
+      gap: 5px;
+    }
+
+    div {
+      @include flex(column, center, stretch);
+      gap: 10px;
+      width: 100%;
+
+      @media screen and (max-width: 750px) {
+        @include flex(row, center, center);
+        gap: 20px;
+        // background-color: red;
+        width: auto;
+      }
+      @media screen and (max-width: 450px) {
+        gap: 5px;
+      }
+
+      button {
+        @media screen and (max-width: 750px) {
+          aspect-ratio: 1/1;
+          width: 60px;
+          @include flex(row, center, center);
+        }
+
+        @media screen and (max-width: 450px) {
+          width: 50px;
+          font-size: 1.1em;
+        }
+        padding: 10px 20px;
+        font-size: 1.2em;
+        background-color: transparent;
+        border: none;
+        @include flex(row, flex-start, center);
+        gap: 20px;
+        color: rgb(44, 44, 44);
+        border-radius: 10px;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(155, 155, 155, 0.2);
+          transition: all 0.3s;
+        }
+
+        &.profile {
+          padding: 10px 15px;
+          gap: 15px;
+        }
+
+        span {
+          aspect-ratio: 1/1;
+          height: 130%;
+          //   min-height: 25px;
+          font-size: 0.8em;
+          border-radius: 50%;
+          @include flex(row, center, center);
+          background-color: $main_accent;
+          color: white;
+          font-weight: 600;
+          @media screen and (max-width: 750px) {
+            height: 100%;
+          }
+        }
+
+        &.active {
+          background-color: rgba(155, 155, 155, 0.2);
+          transition: all 0.3s;
+        }
+
+        p {
+          margin: 0;
+          padding: 0;
+          @media screen and (max-width: 750px) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,121 @@
+@use "../../../styles.scss" as *;
+
+.post-box {
+  max-height: 500px;
+  background-color: rgb(247, 247, 247);
+  overflow: hidden;
+  box-shadow: 22px 26px 34px -38px rgb(166, 166, 167);
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+
+  &:hover {
+    .creator {
+      opacity: 1;
+    }
+  }
+
+  .creator {
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s;
+    // width: 20px;
+    // height: 20px;
+    padding: 6px 15px;
+    border-radius: 500px;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    @include flex(row, center, center);
+    gap: 7px;
+
+    span {
+      height: 25px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      background-color: $main_accent;
+      @include flex(column, center, center);
+      color: white;
+      font-size: 0.9em;
+    }
+
+    div {
+      @include flex(column, center, flex-start);
+      color: white;
+
+      a {
+        padding: 0px;
+        &:first-child {
+          font-size: 0.9em;
+        }
+        &:last-child {
+          font-size: 0.8em;
+          color: rgb(204, 202, 202);
+        }
+      }
+    }
+  }
+  // background-color: red;
+  img {
+    width: 100%;
+  }
+
+  .post-panel {
+    padding: 15px;
+
+    span {
+      color: rgb(78, 78, 78);
+      font-size: 0.9em;
+      display: -webkit-box;
+      width: 100%;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden !important;
+      text-overflow: ellipsis;
+
+      @media screen and (max-width: 600px) {
+        font-size: 0.8em;
+      }
+    }
+
+    a {
+      color: grey;
+      font-size: 0.8em;
+      cursor: pointer;
+      @media screen and (max-width: 600px) {
+        font-size: 0.7em;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    ul {
+      @include flex(row, flex-start, center);
+      padding: 0px;
+      list-style: none;
+      margin: 0;
+      margin-top: 10px;
+      gap: 15px;
+
+      button {
+        &:disabled {
+          cursor: default;
+          color: rgb(192, 188, 188);
+        }
+
+        @media screen and (max-width: 600px) {
+          font-size: 0.8em;
+        }
+        background-color: transparent;
+        border: none;
+        @include flex(row, center, center);
+        gap: 5px;
+        color: rgb(51, 51, 51);
+        cursor: pointer;
+      }
+    }
+  }
+}

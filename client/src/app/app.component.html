@@ -1,4 +1,19 @@
-<app-post-creator></app-post-creator>
-<app-login></app-login>
-<app-signup></app-signup>
-<router-outlet></router-outlet>
+<main>
+  <app-asidemenu
+    (showLogin)="openLogIn($event)"
+    (showSignup)="openSignUp($event)"
+  ></app-asidemenu>
+  <div class="app-content">
+    <app-login
+      *ngIf="showLogInBox"
+      (showLogin)="openLogIn($event)"
+      (showSignup)="openSignUp($event)"
+    ></app-login>
+    <app-signup
+      *ngIf="showSignUpBox"
+      (showSignup)="openSignUp($event)"
+      (showLogIn)="openLogIn($event)"
+    ></app-signup>
+    <router-outlet></router-outlet>
+  </div>
+</main>

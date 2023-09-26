@@ -1,5 +1,13 @@
-<p>feed works!</p>
-<div *ngIf="posts$">
-  <app-post *ngFor="let post of posts$ | async" [post]="post"> </app-post>
-</div>
-<!-- <form action="" method="get" [formGro></form> -->
+<app-post-creator></app-post-creator>
+<section>
+  <h3>For you!</h3>
+  <div *ngIf="posts" class="feed-grid">
+    <article class="feed-column" *ngFor="let col of colsAsIterable; index as i">
+      <app-post
+        *ngFor="let post of posts | masonry : colsAsIterable.length : i + 1"
+        [post]="post"
+      >
+      </app-post>
+    </article>
+  </div>
+</section>

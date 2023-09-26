@@ -9,6 +9,8 @@ import { CreatepostService } from './services/createPost/createpost.service';
 })
 export class AppComponent implements OnInit {
   title = 'client';
+  showLogInBox: boolean = false;
+  showSignUpBox: boolean = false;
 
   constructor(
     private currentUserS: CurrentuserService,
@@ -20,4 +22,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  openLogIn(e: boolean): void {
+    this.showLogInBox = e;
+  }
+
+  openSignUp(e: boolean): void {
+    this.showSignUpBox = e;
+  }
 }

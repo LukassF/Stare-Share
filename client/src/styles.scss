@@ -1,2 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import "ngx-toastr/toastr";
+@import "./resets";
+
+$main_accent: #ef806f;
+$secondary_accent: #a56592;
+$ternary_accent: #475677;
+
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+html,
+body {
+  background-color: rgb(230, 230, 230);
+  padding: 0;
+  margin: 0;
+  font-family: "Exo 2", sans-serif;
+  overflow: hidden;
+}

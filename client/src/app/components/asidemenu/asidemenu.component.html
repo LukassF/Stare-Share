@@ -1,0 +1,52 @@
+<aside>
+  <div class="logo-container">
+    <img
+      src="https://images.squarespace-cdn.com/content/v1/6182a07418bce330796b1ea1/b3be53d0-2265-4d8c-ae6f-5c5b079c2406/SA_logo_red.png"
+      alt="logo"
+      width="50%"
+    />
+  </div>
+
+  <nav>
+    <div>
+      <button routerLink="/home" routerLinkActive="active">
+        <i class="fa fa-home"></i>
+        <p>For you</p>
+      </button>
+      <button routerLinkActive="active">
+        <i class="fa fa-magnifying-glass"></i>
+        <p>Search</p>
+      </button>
+      <button routerLinkActive="active">
+        <i class="fa fa-add"></i>
+        <p>Create</p>
+      </button>
+    </div>
+
+    <div *ngIf="!currentUser">
+      <button routerLinkActive="active" (click)="openLogIn()">
+        <i class="fa-solid fa-user"></i>
+        <p>Log In</p>
+      </button>
+      <button routerLinkActive="active" (click)="openSignUp()">
+        <i class="fa fa-sign-in"></i>
+        <p>Sign Up</p>
+      </button>
+    </div>
+
+    <div *ngIf="currentUser">
+      <button
+        class="profile"
+        [routerLink]="'users/' + currentUser.id"
+        routerLinkActive="active"
+      >
+        <span>{{ currentUser.username[0].toUpperCase() }}</span>
+        <p>Profile</p>
+      </button>
+      <button (click)="logOut()">
+        <i class="fa fa-sign-out"></i>
+        <p>Log out</p>
+      </button>
+    </div>
+  </nav>
+</aside>

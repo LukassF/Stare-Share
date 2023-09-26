@@ -1,0 +1,44 @@
+@use "../../../styles.scss" as *;
+
+section {
+  //   background-color: rgb(247, 247, 247);
+  padding: 20px;
+  margin-top: 20px;
+  width: calc(100% - 40px);
+
+  @media screen and (max-width: 900px) {
+    padding: 0px;
+    width: 100%;
+  }
+
+  h3 {
+    margin: 0px;
+    color: grey;
+  }
+
+  .feed-grid {
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    @media screen and (max-width: 1400px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    @media screen and (max-width: 1000px) {
+      grid-template-columns: 1fr;
+      grid-gap: 0px;
+    }
+    // grid-auto-flow: column;
+    // grid-template-rows: auto;
+    grid-gap: 20px;
+
+    .feed-column {
+      @include flex(column, flex-start, center);
+      gap: 20px;
+    }
+    // grid-auto-rows: 20px;
+  }
+
+  //   border-radius: 10px;
+  //   box-shadow: 22px 26px 34px -38px rgb(166, 166, 167);
+}

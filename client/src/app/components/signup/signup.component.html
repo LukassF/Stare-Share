@@ -1,18 +1,53 @@
-<form [formGroup]="signInForm" action="" method="post" (ngSubmit)="signUp()">
-  <input
-    type="text"
-    name="username"
-    placeholder="Username"
-    formControlName="username"
-  />
-  <input type="text" name="email" placeholder="Email" formControlName="email" />
-  <input
-    type="password"
-    name="password"
-    placeholder="Password"
-    formControlName="password"
-  />
-  <input type="submit" name="signup" value="Sign Up" />
-</form>
+<article class="signup-background" (click)="hideSignUpBox($event)">
+  <div @fadeInOut class="signup-box">
+    <button (click)="hideSignUpBox()"><i class="fa fa-close"></i></button>
 
-<div>{{ data | async }}</div>
+    <section>
+      <h1>Sign up below</h1>
+
+      <form
+        [formGroup]="signInForm"
+        action=""
+        method="post"
+        (ngSubmit)="signUp()"
+      >
+        <div [tabIndex]="0">
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            required
+            (input)="checkInputs($event)"
+          />
+          <label for="username">Username</label>
+        </div>
+        <div [tabIndex]="0">
+          <input
+            type="text"
+            id="email"
+            formControlName="email"
+            required
+            (input)="checkInputs($event)"
+          />
+          <label for="email">Email</label>
+        </div>
+        <div [tabIndex]="0">
+          <input
+            type="password"
+            id="password"
+            formControlName="password"
+            required
+            (input)="checkInputs($event)"
+          />
+          <label for="password">Password</label>
+        </div>
+        <input type="submit" name="signup" value="Sign Up" />
+      </form>
+
+      <div class="log-in-redirect">
+        <h4>Already have an account?</h4>
+        <a (click)="goToLogin()">Log In</a>
+      </div>
+    </section>
+  </div>
+</article>
