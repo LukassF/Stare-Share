@@ -13,10 +13,21 @@
         <i class="fa fa-home"></i>
         <p>For you</p>
       </button>
-      <button routerLinkActive="active">
+      <button (click)="startSearch()">
         <i class="fa fa-magnifying-glass"></i>
         <p>Search</p>
       </button>
+
+      <article *ngIf="searchOpen" class="search-results">
+        <input type="text" placeholder="Search" (input)="search($event)" />
+        <ul *ngIf="foundUsers && foundUsers.length !== 0">
+          <li *ngFor="let user of foundUsers" [routerLink]="'users/' + user.id">
+            <div>{{ user.username }}</div>
+            <div>{{ user.email }}</div>
+          </li>
+        </ul>
+        <a *ngIf="!foundUsers || foundUsers.length === 0"> No results. </a>
+      </article>
       <button routerLinkActive="active">
         <i class="fa fa-add"></i>
         <p>Create</p>

@@ -1,6 +1,7 @@
 @use "../../../styles.scss" as *;
 
 section {
+  min-height: 300px;
   //   background-color: rgb(247, 247, 247);
   padding: 20px;
   margin-top: 20px;

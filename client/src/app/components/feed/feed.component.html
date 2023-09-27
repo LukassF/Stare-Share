@@ -1,7 +1,8 @@
 <app-post-creator></app-post-creator>
+
 <section>
   <h3>For you!</h3>
-  <div *ngIf="posts" class="feed-grid">
+  <div *ngIf="posts && !loading" class="feed-grid">
     <article class="feed-column" *ngFor="let col of colsAsIterable; index as i">
       <app-post
         *ngFor="let post of posts | masonry : colsAsIterable.length : i + 1"
@@ -10,7 +11,7 @@
       </app-post>
     </article>
   </div>
-  <div *ngIf="!posts || posts.length === 0">
+  <div *ngIf="(!posts || posts.length === 0) && !loading">
     <h2>No posts yet, add some or come back later!</h2>
     <span style="color: grey"
       >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error nemo
@@ -22,4 +23,17 @@
       deleniti vitae.</span
     >
   </div>
+  <mat-progress-spinner
+    *ngIf="loading"
+    color="#475677"
+    mode="indeterminate"
+    [diameter]="80"
+    style="
+      position: absolute;
+      left: 50%;
+      transform: 'translateX(-50%)';
+      margin-top: 40px;
+    "
+  >
+  </mat-progress-spinner>
 </section>

@@ -29,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MasonryPipe } from './pipes/masonry.pipe';
 import { FooterComponent } from './components/footer/footer.component';
 import { IndividualComponent } from './components/comment/individual/individual.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { IndividualComponent } from './components/comment/individual/individual.
     MatSnackBarModule,
     MatIconModule,
     ToastrModule.forRoot(),
+    MatProgressSpinnerModule,
   ],
   providers: [
     LoginService,

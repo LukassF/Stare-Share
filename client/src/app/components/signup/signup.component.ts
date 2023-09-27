@@ -35,8 +35,8 @@ export class SignupComponent implements OnDestroy {
 
   constructor(
     private signupS: SignupService,
-    private loginS: LoginService,
-    private currentUserS: CurrentuserService,
+    // private loginS: LoginService,
+    // private currentUserS: CurrentuserService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) {
@@ -68,22 +68,22 @@ export class SignupComponent implements OnDestroy {
           }
         } else {
           this.toastr.success('Signup successfull!');
-          this.logIn(this.username, this.password);
+          // this.logIn(this.username, this.password);
           this.showSignup.emit(false);
         }
       });
   }
 
-  logIn(username: string, password: string) {
-    console.log(username, password);
-    this.subscriptionLogIn = this.loginS
-      .logIn(username, password)
-      .subscribe((item) => {
-        console.log(item);
-        delete item.session_logs;
-        this.currentUserS.changeCurrentUser(item);
-      });
-  }
+  // logIn(username: string, password: string) {
+  //   console.log(username, password);
+  //   this.subscriptionLogIn = this.loginS
+  //     .logIn(username, password)
+  //     .subscribe((item) => {
+  //       console.log(item);
+  //       delete item.session_logs;
+  //       this.currentUserS.changeCurrentUser(item);
+  //     });
+  // }
 
   ngOnDestroy(): void {
     if (this.subscriptionSignUp) this.subscriptionSignUp.unsubscribe();

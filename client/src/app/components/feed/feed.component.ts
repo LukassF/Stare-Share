@@ -12,6 +12,8 @@ export class FeedComponent implements OnDestroy {
   subscription: Subscription | undefined;
   posts: Post[] | undefined;
   colsAsIterable: number[] = [1, 2, 3];
+  loading: boolean = false;
+
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     if (
@@ -33,15 +35,20 @@ export class FeedComponent implements OnDestroy {
     }
   }
 
-  constructor(
-    private getPostsS: GetpostsService,
-    private getUsersS: GetusersService
-  ) {
+  constructor(private getPostsS: GetpostsService) {
+    this.loading = true;
     this.subscription = this.getPostsS.getAllPosts().subscribe((data) => {
-      console.log(data);
       this.posts = data;
+      this.sortPosts();
+      this.loading = false;
     });
-    this.getUsersS.getUsers().subscribe((data) => console.log(data));
+  }
+
+  sortPosts() {
+    this.posts?.sort(
+      (a, b) =>
+        Number(new Date(b.upload_date)) - Number(new Date(a.upload_date))
+    );
   }
 
   compareArrays = (a: number[], b: number[]) => {
