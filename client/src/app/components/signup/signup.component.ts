@@ -5,6 +5,8 @@ import { SignupService } from 'src/app/services/signup/signup.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { LoginService } from 'src/app/services/login/login.service';
+import { CurrentuserService } from 'src/app/services/currentUser/currentuser.service';
 
 @Component({
   selector: 'app-signup',
@@ -24,7 +26,8 @@ export class SignupComponent implements OnDestroy {
   @Output() showSignup = new EventEmitter();
   @Output() showLogIn = new EventEmitter();
 
-  subscription: Subscription | undefined;
+  subscriptionSignUp: Subscription | undefined;
+  subscriptionLogIn: Subscription | undefined;
   signInForm: FormGroup;
   username: string = '';
   email: string = '';
@@ -32,6 +35,8 @@ export class SignupComponent implements OnDestroy {
 
   constructor(
     private signupS: SignupService,
+    private loginS: LoginService,
+    private currentUserS: CurrentuserService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService
   ) {
@@ -47,7 +52,7 @@ export class SignupComponent implements OnDestroy {
     this.email = this.signInForm.value.email;
     this.password = this.signInForm.value.password;
 
-    this.subscription = this.signupS
+    this.subscriptionSignUp = this.signupS
       .signUp(this.username, this.email, this.password)
       .subscribe((res: any) => {
         if (res && res !== 'Signup successfull!') {
@@ -63,13 +68,26 @@ export class SignupComponent implements OnDestroy {
           }
         } else {
           this.toastr.success('Signup successfull!');
+          this.logIn(this.username, this.password);
           this.showSignup.emit(false);
         }
       });
   }
 
+  logIn(username: string, password: string) {
+    console.log(username, password);
+    this.subscriptionLogIn = this.loginS
+      .logIn(username, password)
+      .subscribe((item) => {
+        console.log(item);
+        delete item.session_logs;
+        this.currentUserS.changeCurrentUser(item);
+      });
+  }
+
   ngOnDestroy(): void {
-    if (this.subscription) this.subscription.unsubscribe();
+    if (this.subscriptionSignUp) this.subscriptionSignUp.unsubscribe();
+    if (this.subscriptionLogIn) this.subscriptionLogIn.unsubscribe();
   }
 
   hideSignUpBox(e?: Event): void {

@@ -1,6 +1,7 @@
 @use "../../../styles.scss" as *;
 
 .login-background {
+  z-index: 20;
   width: 100vw;
   height: 100vh;
   position: absolute;

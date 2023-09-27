@@ -1,7 +1,7 @@
 @use "../../../styles.scss" as *;
 
 .post-box {
-  max-height: 500px;
+  // max-height: 500px;
   background-color: rgb(247, 247, 247);
   overflow: hidden;
   box-shadow: 22px 26px 34px -38px rgb(166, 166, 167);
@@ -21,9 +21,9 @@
     transition: opacity 0.3s;
     // width: 20px;
     // height: 20px;
-    padding: 6px 15px;
-    border-radius: 500px;
-    background-color: rgba(0, 0, 0, 0.6);
+    padding: 6px 20px 6px 10px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.4);
     position: absolute;
     left: 10px;
     top: 10px;
@@ -50,8 +50,8 @@
           font-size: 0.9em;
         }
         &:last-child {
-          font-size: 0.8em;
-          color: rgb(204, 202, 202);
+          font-size: 0.7em;
+          color: rgb(228, 226, 226);
         }
       }
     }

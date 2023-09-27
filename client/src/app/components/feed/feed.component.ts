@@ -38,6 +38,7 @@ export class FeedComponent implements OnDestroy {
     private getUsersS: GetusersService
   ) {
     this.subscription = this.getPostsS.getAllPosts().subscribe((data) => {
+      console.log(data);
       this.posts = data;
     });
     this.getUsersS.getUsers().subscribe((data) => console.log(data));

@@ -3,7 +3,7 @@
     <span>{{ post.username[0].toUpperCase() }}</span>
     <div>
       <a>{{ post.username }}</a>
-      <a>{{ post.email }}</a>
+      <a>{{ uploadDate }}</a>
     </div>
   </div>
 
@@ -20,7 +20,9 @@
       <button (click)="likePost()" [disabled]="isMine">
         <i
           [style.color]="
-            isLiked
+            !currentUserS.currentUser.value
+              ? 'rgb(192, 188, 188)'
+              : isLiked
               ? 'red'
               : isMine
               ? ' color: rgb(192, 188, 188)'
@@ -30,26 +32,19 @@
         ></i
         >{{ post.likes }}
       </button>
-      <button [disabled]="!currentUserS.currentUser.value">
-        <i class="far fa-message"></i>{{ post.comments }}
+      <button
+        [disabled]="!currentUserS.currentUser.value"
+        (click)="openComments(true)"
+      >
+        <i class="far fa-message"></i>{{ commentQuantity }}
       </button>
     </ul>
   </div>
-  <!-- <button
-    (click)="likePost()"
-    [disabled]="isMine"
-    [style.backgroundColor]="isLiked ? 'red' : 'grey'"
-  >
-    Like post
-  </button>
-
-  <button (click)="openComments()" [disabled]="!currentUserS.currentUser.value">
-    Comment
-  </button>
 
   <app-comments
     [post]="post"
     *ngIf="showComments"
     (numOfComments)="updateCommentQuantity($event)"
-  ></app-comments> -->
+    (showComments)="openComments(false)"
+  ></app-comments>
 </div>

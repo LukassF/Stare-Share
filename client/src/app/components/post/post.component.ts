@@ -44,6 +44,18 @@ export class PostComponent implements OnChanges {
     else return false;
   }
 
+  get uploadDate() {
+    if (this.post)
+      return (
+        new Date(this.post.upload_date).toDateString().slice(4) +
+        ', ' +
+        new Date(this.post.upload_date).getHours() +
+        ':' +
+        new Date(this.post.upload_date).getMinutes().toString().padStart(2, '0')
+      );
+    else return undefined;
+  }
+
   likePost() {
     if (!this.post || !this.currentUserS.currentUser.value) return;
 
@@ -57,11 +69,12 @@ export class PostComponent implements OnChanges {
   }
 
   updateCommentQuantity(e: any) {
+    console.log(e);
     this.commentQuantity = e;
   }
 
-  openComments() {
-    this.showComments = !this.showComments;
+  openComments(value: boolean) {
+    this.showComments = value;
   }
 
   expandDescription(): void {

@@ -1,13 +1,26 @@
-<div *ngIf="postComments">
-  <div *ngFor="let comment of postComments">{{ comment.content }}</div>
-</div>
+<section class="comments-background" (click)="hideCommentsBox($event)">
+  <article class="comments-box">
+    <div class="header-div">
+      <h3>Comments</h3>
+    </div>
+    <div *ngIf="postComments" class="comment-section">
+      <app-individual
+        *ngFor="let comment of postComments"
+        [comment]="comment"
+        [post]="post"
+      ></app-individual>
+    </div>
 
-<form
-  action=""
-  method="post"
-  [formGroup]="commentForm"
-  (ngSubmit)="sendComment()"
->
-  <input type="text" placeholder="Comment" formControlName="comment" />
-  <button [disabled]="this.commentForm.status === 'INVALID'">Send</button>
-</form>
+    <form
+      action=""
+      method="post"
+      [formGroup]="commentForm"
+      (ngSubmit)="sendComment()"
+    >
+      <input type="text" placeholder="Comment" formControlName="comment" />
+      <button [disabled]="this.commentForm.status === 'INVALID'">
+        <i class="fa fa-check"></i>
+      </button>
+    </form>
+  </article>
+</section>

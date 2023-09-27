@@ -1,0 +1,52 @@
+@use "../../../styles.scss" as *;
+
+footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  @media screen and (max-width: 1200px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+  margin-top: 50px;
+
+  article {
+    padding: 10px;
+    h3 {
+      font-size: 1.1em;
+    }
+
+    ul {
+      padding: 0;
+      //   padding-left: 10px;
+      list-style: none;
+
+      li {
+        color: grey;
+        cursor: pointer;
+        margin: 10px 0px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      &.social {
+        @include flex(row, space-between, center);
+      }
+
+      &.contact {
+        li {
+          word-break: break-all;
+          i {
+            margin-right: 15px;
+          }
+        }
+      }
+    }
+  }
+}

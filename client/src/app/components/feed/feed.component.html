@@ -10,4 +10,16 @@
       </app-post>
     </article>
   </div>
+  <div *ngIf="!posts || posts.length === 0">
+    <h2>No posts yet, add some or come back later!</h2>
+    <span style="color: grey"
+      >Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error nemo
+      veritatis libero amet hic repellat asperiores repudiandae in eius fugit ad
+      adipisci inventore impedit tempore quas ab, iure itaque officia. Lorem
+      ipsum dolor sit amet consectetur adipisicing elit. Maiores impedit,
+      praesentium vero veritatis ad explicabo corporis doloribus. Reiciendis
+      similique quis nihil iure, ut, voluptates maiores dolore labore mollitia
+      deleniti vitae.</span
+    >
+  </div>
 </section>

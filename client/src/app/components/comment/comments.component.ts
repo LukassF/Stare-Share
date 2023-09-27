@@ -20,6 +20,8 @@ import pusherJs from 'pusher-js';
 export class CommentsComponent implements OnInit, OnDestroy {
   @Input() post: Post | undefined;
   @Output() numOfComments = new EventEmitter();
+  @Output() showComments = new EventEmitter();
+
   pusherChannel: any;
   postComments: Array<Comment> = [];
   subscription: Subscription | undefined;
@@ -46,6 +48,7 @@ export class CommentsComponent implements OnInit, OnDestroy {
     this.pusherChannel = pusher.subscribe('comment-section');
     this.pusherChannel.bind('new-comment', (lastComment: any) => {
       this.postComments.push(lastComment);
+      this.sortComments();
       this.numOfComments.emit(this.postComments.length);
     });
   }
@@ -75,8 +78,20 @@ export class CommentsComponent implements OnInit, OnDestroy {
       .getComments('', 0, this.post.id)
       .subscribe((data) => {
         this.postComments = data;
-        console.log(data);
+        this.sortComments();
       });
+  }
+
+  sortComments() {
+    this.postComments.sort(
+      (a, b) =>
+        Number(new Date(b.comment_date)) - Number(new Date(a.comment_date))
+    );
+  }
+
+  hideCommentsBox(e?: Event) {
+    if (e?.target !== e?.currentTarget) return;
+    this.showComments.emit(false);
   }
 
   ngOnDestroy(): void {

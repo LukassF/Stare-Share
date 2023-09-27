@@ -1,0 +1,55 @@
+@use "../../../../styles.scss" as *;
+
+.comment {
+  header {
+    @include flex(row, flex-start, center);
+    gap: 5px;
+
+    span {
+      width: 25px;
+      aspect-ratio: 1/1;
+      @include flex(row, center, center);
+      border-radius: 50%;
+      background-color: $ternary_accent;
+      font-size: 0.8em;
+      color: white;
+    }
+
+    h4 {
+      margin: 0;
+    }
+
+    a {
+      margin: 0;
+      padding: 0;
+      color: grey;
+      font-size: 0.7em;
+      margin-left: 10px;
+    }
+
+    div {
+      font-size: 0.8em;
+      color: $main_accent;
+    }
+  }
+
+  p {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    margin-top: 5px;
+    margin-left: 25px;
+    color: rgb(78, 78, 78);
+    font-size: 0.9em;
+    display: -webkit-box;
+    // width: 100%;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+
+    @media screen and (max-width: 600px) {
+      font-size: 0.8em;
+    }
+  }
+}

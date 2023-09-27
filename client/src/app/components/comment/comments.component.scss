@@ -1,0 +1,106 @@
+@use "../../../styles.scss" as *;
+
+.comments-background {
+  z-index: 20;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  @include flex(row, center, center);
+
+  .comments-box {
+    width: 400px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 10px;
+    padding: 20px;
+    aspect-ratio: 4/5;
+    display: grid;
+    grid-template-rows: 1fr 10fr 1fr;
+    // @include flex(column, flex-start, stretch);
+
+    @media screen and (max-width: 500px) {
+      scale: 0.9;
+    }
+    @media screen and (max-width: 450px) {
+      scale: 0.8;
+    }
+    @media screen and (max-width: 400px) {
+      scale: 0.65;
+    }
+    @media screen and (max-width: 350px) {
+      scale: 0.6;
+    }
+
+    .header-div {
+      border-bottom: solid grey 1px;
+      h3 {
+        margin: 0;
+        font-size: 1.3em;
+      }
+    }
+
+    .comment-section {
+      //   background-color: red;
+      @include flex(column, flex-start, flex-start);
+      overflow-x: hidden;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgb(182, 182, 182) transparent;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track-piece {
+        background-color: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background-color: rgb(182, 182, 182);
+      }
+      gap: 30px;
+      padding: 20px 10px;
+      position: relative;
+    }
+
+    form {
+      border-top: solid grey 1px;
+      padding-top: 10px;
+      //   background-color: blue;
+      display: grid;
+      grid-template-columns: 9fr 1fr;
+      place-content: center;
+
+      input {
+        padding-left: 10px;
+        background-color: transparent;
+        outline: none;
+        border: none;
+      }
+
+      button {
+        cursor: pointer;
+        aspect-ratio: 1/1;
+        height: 35px;
+        border: none;
+        color: white;
+        font-weight: 800;
+        border-radius: 50%;
+        background-color: $main_accent;
+        @include flex(row, center, center);
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: default;
+        }
+      }
+
+      //   button {
+      //     width: 10%;
+      //   }
+    }
+  }
+}

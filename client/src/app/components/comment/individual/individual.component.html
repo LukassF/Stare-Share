@@ -1,0 +1,17 @@
+<div class="comment" *ngIf="comment">
+  <header>
+    <span>{{ comment.username[0].toUpperCase() }}</span>
+    <h4>{{ comment.username }}</h4>
+    <a>{{ commentDate(comment) }}</a>
+    <div *ngIf="post?.username === comment.username">Creator</div>
+  </header>
+  <p
+    (click)="expandComment()"
+    [style.display]="isExpanded ? 'block' : '-webkit-box'"
+  >
+    {{ comment.content }} Lorem ipsum dolor sit amet consectetur adipisicing
+    elit. Quae distinctio fuga vel error atque, accusantium illo ab quod, vitae,
+    enim dolorum veritatis exercitationem eveniet harum. Praesentium ipsa atque
+    cupiditate hic?
+  </p>
+</div>
