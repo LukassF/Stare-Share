@@ -3,7 +3,7 @@
 .comment {
   header {
     @include flex(row, flex-start, center);
-    gap: 5px;
+    gap: 7px;
 
     span {
       width: 25px;

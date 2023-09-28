@@ -11,10 +11,12 @@ $postsContr = new GetPostsContr();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postdata = json_decode(file_get_contents("php://input"));
 
-    if ($postdata->liked && $postdata->user_id)
+    if ($postdata->type === 'liked')
         $result = $postsContr->getLikedPosts($postdata->user_id);
-    elseif (!$postdata->liked && $postdata->user_id)
+    elseif ($postdata->type === 'userId')
         $result = $postsContr->getUsersPosts($postdata->user_id);
+    elseif ($postdata->type === 'segmented')
+        $result = $postsContr->getPostsSegmented($postdata->start, $postdata->offset);
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $result = $postsContr->getAllPosts();
 }

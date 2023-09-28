@@ -1,6 +1,30 @@
-<button (click)="openLiked()">show liked</button>
-<div *ngIf="likedPosts$">
-  <app-post *ngFor="let post of likedPosts$ | async" [post]="post"></app-post>
-</div>
+<section *ngIf="likedPosts" class="liked-posts-grid">
+  <article
+    class="liked-posts-column"
+    *ngFor="let col of colsAsIterable; index as i"
+  >
+    <app-post
+      *ngFor="let post of likedPosts | masonry : colsAsIterable.length : i + 1"
+      [post]="post"
+    >
+    </app-post>
+  </article>
 
-<div *ngElse>No liked posts yet</div>
+  <mat-progress-spinner
+    *ngIf="loading"
+    color="#475677"
+    mode="indeterminate"
+    [diameter]="80"
+    style="
+      position: absolute;
+      left: 50%;
+      transform: 'translateX(-50%)';
+      margin-top: 40px;
+    "
+  >
+  </mat-progress-spinner>
+
+  <div class="no-posts" *ngIf="!likedPosts || likedPosts.length === 0">
+    No liked posts yet
+  </div>
+</section>

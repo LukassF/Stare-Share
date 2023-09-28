@@ -1,9 +1,64 @@
-<p>user-profile works!</p>
-<div *ngIf="userPosts$">
-  <div *ngFor="let post of userPosts$ | async">
-    {{ post.description }}
-    <img [src]="post.base64" width="100px" />
-  </div>
-</div>
+<header>
+  <article class="profile-circle">
+    {{ (userInfo$ | async)?.username?.slice(0, 1)?.toUpperCase() }}
+  </article>
+  <article class="user-info" *ngIf="userInfo$">
+    <p>
+      Since {{ (userInfo$ | async)?.register_date?.toString()?.slice(0, 4) }}
+    </p>
+    <div>
+      <h1>{{ (userInfo$ | async)?.username }}</h1>
+      <h3>{{ (userInfo$ | async)?.email }}</h3>
+    </div>
+    <span>
+      <div><i class="fa fa-image"></i>{{ (userInfo$ | async)?.posts }}</div>
+      <div><i class="fa fa-heart"></i>{{ (userInfo$ | async)?.liked }}</div>
+    </span>
+  </article>
+</header>
 
-<app-likedposts [liked]="liked"></app-likedposts>
+<span class="posts-header">
+  <h3 class="main-htag">
+    {{ (userInfo$ | async)?.username }}&apos;s
+    {{ showLiked ? "liked posts" : "posts" }}
+  </h3>
+  <button *ngIf="isMine" (click)="toggleShowLiked()" [class.active]="showLiked">
+    Show liked
+  </button>
+</span>
+<section *ngIf="!showLiked && userPosts" class="user-posts-grid">
+  <article
+    class="user-posts-column"
+    *ngFor="let col of colsAsIterable; index as i"
+  >
+    <app-post
+      *ngFor="let post of userPosts | masonry : colsAsIterable.length : i + 1"
+      [post]="post"
+    >
+    </app-post>
+  </article>
+
+  <mat-progress-spinner
+    *ngIf="loading"
+    color="#475677"
+    mode="indeterminate"
+    [diameter]="80"
+    style="
+      position: absolute;
+      left: 50%;
+      transform: 'translateX(-50%)';
+      margin-top: 40px;
+    "
+  >
+  </mat-progress-spinner>
+
+  <div *ngIf="!userPosts || userPosts.length === 0" class="no-posts">
+    No posts yet
+  </div>
+</section>
+
+<app-likedposts
+  [liked]="liked"
+  *ngIf="showLiked"
+  [colsAsIterable]="colsAsIterable"
+></app-likedposts>

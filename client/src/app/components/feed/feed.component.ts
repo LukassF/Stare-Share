@@ -1,18 +1,26 @@
 import { Observable, Subscription } from 'rxjs';
 import { GetusersService } from 'src/app/services/getUsers/getusers.service';
 import { GetpostsService } from './../../services/getPosts/getposts.service';
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  HostListener,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements OnDestroy {
+export class FeedComponent implements OnDestroy, AfterViewInit {
   subscription: Subscription | undefined;
-  posts: Post[] | undefined;
+  posts: Post[] = [];
   colsAsIterable: number[] = [1, 2, 3];
   loading: boolean = false;
+  intersectionQuantity: number = 0;
+  @ViewChild('endOfPosts') endOfPosts: any;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -44,20 +52,44 @@ export class FeedComponent implements OnDestroy {
     });
   }
 
-  sortPosts() {
-    this.posts?.sort(
-      (a, b) =>
-        Number(new Date(b.upload_date)) - Number(new Date(a.upload_date))
-    );
+  ngAfterViewInit(): void {
+    console.log(this.endOfPosts.nativeElement);
+    const observer = new IntersectionObserver((entries: any) => {
+      entries.forEach((entry: any) => {
+        if (entry.isIntersecting) {
+          this.intersectionQuantity++;
+          // this.getPosts(
+          //   this.intersectionQuantity * 10,
+          //   (this.intersectionQuantity + 1) * 10
+          // );
+          // this.subscription.unsubscribe();
+        }
+      });
+    });
+    observer.observe(this.endOfPosts.nativeElement);
   }
 
-  compareArrays = (a: number[], b: number[]) => {
+  getPosts(start: number, offset: number) {
+    this.loading = true;
+    this.subscription = this.getPostsS
+      .getPostsSegmented(start, offset)
+      .subscribe((data) => {
+        this.posts.push(data);
+        this.sortPosts();
+        this.loading = false;
+      });
+  }
+
+  sortPosts() {
+    this.posts?.sort((a, b) => b.likes + b.comments - (a.likes + a.comments));
+  }
+
+  private compareArrays = (a: number[], b: number[]) => {
     return JSON.stringify(a) === JSON.stringify(b);
   };
 
-  reloadMasonryLayout(array: number[]) {
+  private reloadMasonryLayout(array: number[]) {
     this.colsAsIterable = array;
-    this.posts = this.posts;
   }
 
   ngOnDestroy(): void {

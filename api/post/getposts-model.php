@@ -6,7 +6,7 @@ class GetPostsModel extends DBH
     public function fetchAll()
     {
         try {
-            $sql = "SELECT p.id,p.image, p.description, p.upload_date, p.user_id,p.likes,p.comments, u.email, u.username FROM posts p JOIN users u ON u.id = p.USER_ID;";
+            $sql = "SELECT p.id,p.image, p.description, p.upload_date, p.user_id,p.likes,p.comments, u.email, u.username FROM posts p JOIN users u ON u.id = p.USER_ID ORDER BY p.id; ";
             $stmt = parent::connect()->prepare($sql);
             $stmt->execute();
 
@@ -47,6 +47,20 @@ class GetPostsModel extends DBH
             return $result;
         } catch (PDOException $e) {
             return false;
+        }
+    }
+
+    public function fetchSegmentedPosts(int $start, int $offset)
+    {
+        try {
+            $sql = "SELECT p.id,p.image, p.description, p.upload_date, p.user_id,p.likes,p.comments, u.email, u.username FROM posts p JOIN users u ON u.id = p.USER_ID ORDER BY p.id LIMIT $start,$offset;";
+            $stmt = parent::connect()->prepare($sql);
+            $stmt->execute();
+
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (PDOException $e) {
+            return $e;
         }
     }
 

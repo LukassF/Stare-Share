@@ -4,7 +4,12 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'masonry',
 })
 export class MasonryPipe implements PipeTransform {
-  transform(value: any[], numColumns: number, colNum: number): Post[] {
+  transform(
+    value: Post[] | null,
+    numColumns: number,
+    colNum: number
+  ): Post[] | undefined {
+    if (!value) return;
     if (value.length === 0) return value;
     if (
       numColumns < 1 ||

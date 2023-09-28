@@ -20,7 +20,8 @@ class UserModel extends DBH
     public function fetchUserInfo(int $user_id)
     {
         try {
-            $sql = "SELECT u.id,u.username,u.email,u.liked, u.register_date FROM users u WHERE u.id=:user_id;";
+            // SELECT u.id,u.username,u.email,u.register_date,u.liked,COUNT(p.id) as posts FROM users u JOIN posts p ON p.USER_ID = u.ID GROUP BY u.id HAVING u.ID = 98;
+            $sql = "SELECT u.id,u.username,u.email,u.register_date,u.liked, COUNT(p.id) as posts FROM users u JOIN posts p ON p.USER_ID = u.ID GROUP BY u.id HAVING u.ID = :user_id;";
             $stmt = parent::connect()->prepare($sql);
             $stmt->bindParam(':user_id', $user_id);
             $stmt->execute();

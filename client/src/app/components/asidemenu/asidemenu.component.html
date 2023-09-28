@@ -22,7 +22,9 @@
         <input type="text" placeholder="Search" (input)="search($event)" />
         <ul *ngIf="foundUsers && foundUsers.length !== 0">
           <li *ngFor="let user of foundUsers" [routerLink]="'users/' + user.id">
-            <div>{{ user.username }}</div>
+            <div>
+              {{ user.username }}
+            </div>
             <div>{{ user.email }}</div>
           </li>
         </ul>

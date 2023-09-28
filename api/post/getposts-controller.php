@@ -40,6 +40,17 @@ class GetPostsContr
         return $likedPosts;
     }
 
+    public function getPostsSegmented(int $start, int $offset)
+    {
+
+        $arr = $this->postsModel->fetchSegmentedPosts($start, $offset);
+        if ($arr)
+            $segmentedPosts = $this->getBase64($arr);
+        else $segmentedPosts = [];
+
+        return $segmentedPosts;
+    }
+
     private function getBase64(array $array)
     {
         $resultArr = [];

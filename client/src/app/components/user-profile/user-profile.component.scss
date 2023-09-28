@@ -1,0 +1,130 @@
+@use "../../../styles.scss" as *;
+
+header {
+  min-height: 250px;
+  border-bottom: solid grey 2px;
+  @include flex(row, flex-start, center);
+
+  @media screen and (max-width: 500px) {
+    @include flex(column, flex-start, center);
+    padding: 40px 0px;
+  }
+  gap: 30px;
+
+  .profile-circle {
+    height: 150px;
+    aspect-ratio: 1/1;
+    @include flex(row, center, center);
+    font-size: 3em;
+    font-weight: 800;
+    color: white;
+    background-color: $ternary_accent;
+    border-radius: 50%;
+  }
+
+  .user-info {
+    @include flex(column, space-between, flex-start);
+    @media screen and (max-width: 500px) {
+      @include flex(column, center, center);
+      gap: 10px;
+    }
+    gap: 20px;
+
+    p {
+      margin: 0;
+      padding: 0;
+      color: $main_accent;
+      font-size: 0.8em;
+      margin-bottom: -10px;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+    h3 {
+      margin: 0;
+      color: rgb(145, 143, 143);
+      font-weight: 400;
+    }
+
+    span {
+      //   margin-top: 30px;
+      @include flex(row, center, center);
+      gap: 20px;
+
+      div {
+        color: grey;
+        i {
+          margin-right: 5px;
+          color: rgb(44, 44, 44);
+        }
+      }
+    }
+  }
+}
+.posts-header {
+  margin-top: 40px;
+  @include flex(row, space-between, center);
+  .main-htag {
+    margin: 0px;
+
+    color: grey;
+  }
+
+  button {
+    background-color: transparent;
+    border: solid $main_accent 2px;
+    padding: 5px 10px;
+    color: $main_accent;
+    transition: all 0.2s;
+    cursor: pointer;
+    border-radius: 10px;
+    @include flex(row, center, center);
+
+    &:hover {
+      background-color: $main_accent;
+      color: white;
+    }
+
+    &.active {
+      background-color: $main_accent;
+      color: white;
+
+      &:hover {
+        background-color: transparent;
+        color: $main_accent;
+      }
+    }
+  }
+}
+
+.user-posts-grid {
+  position: relative;
+  z-index: 0;
+  padding-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    grid-gap: 0px;
+  }
+
+  grid-gap: 20px;
+
+  .user-posts-column {
+    @include flex(column, flex-start, center);
+    gap: 20px;
+  }
+
+  .no-posts {
+    font-size: 1.2em;
+    color: grey;
+    // align-self: flex-start;
+    // padding: 10px;
+  }
+}

@@ -2,6 +2,7 @@ interface User {
   id: number;
   username: string;
   email: string;
-  registe_date: Date;
+  register_date: Date;
   liked: string | Array<string>;
+  posts: number;
 }

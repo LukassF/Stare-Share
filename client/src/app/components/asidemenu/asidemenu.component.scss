@@ -61,8 +61,6 @@ aside {
       }
 
       .search-results {
-        padding: 0px 10px;
-
         @media screen and (max-width: 750px) {
           display: none;
         }
@@ -100,6 +98,8 @@ aside {
         li {
           @include flex(column, center, flex-start);
           padding: 5px 10px;
+          width: 100%;
+          position: relative;
 
           cursor: pointer;
           &:hover {
@@ -107,6 +107,11 @@ aside {
           }
 
           div {
+            width: 90%;
+            display: block;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
             &:last-child {
               color: grey;
               font-size: 0.8em;
