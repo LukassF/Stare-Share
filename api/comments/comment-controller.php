@@ -7,15 +7,13 @@ class CommentContr
     private $content;
     private $post_id;
     private $user_id;
-    private $pusher;
     private $commentModel;
 
-    public function __construct(string $content, int $user_id, int $post_id, $pusher)
+    public function __construct(string $content, int $user_id, int $post_id)
     {
         $this->content = $content;
         $this->user_id = $user_id;
         $this->post_id = $post_id;
-        $this->pusher = $pusher;
         $this->commentModel = new CommentModel();
     }
 
@@ -24,9 +22,7 @@ class CommentContr
         if (!empty($this->content)) {
             $insertedRow = $this->commentModel->insertComment($this->content, $this->user_id, $this->post_id);
 
-            $this->pusher->trigger('comment-section', 'new-comment', $insertedRow);
-
-            // return $insertedRow;
+            return $insertedRow;
         } else return false;
     }
 

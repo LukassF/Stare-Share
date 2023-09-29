@@ -22,7 +22,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
   @Output() numOfComments = new EventEmitter();
   @Output() showComments = new EventEmitter();
 
-  pusherChannel: any;
   postComments: Array<Comment> = [];
   subscription: Subscription | undefined;
   sendCommentSubs: Subscription | undefined;
@@ -39,18 +38,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getComments();
-
-    //initializing pusher for websocket connection
-    var pusher = new pusherJs('5f08c4ab1ae08966f7f9', {
-      cluster: 'eu',
-    });
-
-    this.pusherChannel = pusher.subscribe('comment-section');
-    this.pusherChannel.bind('new-comment', (lastComment: any) => {
-      this.postComments.push(lastComment);
-      this.sortComments();
-      this.numOfComments.emit(this.postComments.length);
-    });
   }
 
   sendComment() {
@@ -67,7 +54,12 @@ export class CommentsComponent implements OnInit, OnDestroy {
         this.currentUserS.currentUser.value.id,
         this.post.id
       )
-      .subscribe((data) => console.log(data));
+      .subscribe((data) => {
+        console.log(data);
+        this.postComments.push(data);
+        this.sortComments();
+        this.numOfComments.emit(this.postComments.length);
+      });
 
     this.commentForm.reset();
   }
@@ -97,6 +89,6 @@ export class CommentsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.subscription) this.subscription.unsubscribe();
     if (this.sendCommentSubs) this.sendCommentSubs.unsubscribe();
-    if (this.pusherChannel) this.pusherChannel.unsubscribe('comment-section');
+    // if (this.pusherChannel) this.pusherChannel.unsubscribe('comment-section');
   }
 }

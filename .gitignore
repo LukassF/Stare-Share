@@ -11,6 +11,7 @@ client/node_modules
 api/post/uploads
 npm-debug.log
 yarn-error.log
+api/vendor
 
 # IDEs and editors
 .idea/
