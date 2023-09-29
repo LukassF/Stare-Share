@@ -14,9 +14,10 @@ import {
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements OnDestroy, AfterViewInit {
+export class FeedComponent implements OnDestroy {
   subscription: Subscription | undefined;
   posts: Post[] = [];
+  auxilliary: any = [];
   colsAsIterable: number[] = [1, 2, 3];
   loading: boolean = false;
   intersectionQuantity: number = 0;
@@ -50,34 +51,11 @@ export class FeedComponent implements OnDestroy, AfterViewInit {
       this.sortPosts();
       this.loading = false;
     });
-  }
 
-  ngAfterViewInit(): void {
-    console.log(this.endOfPosts.nativeElement);
-    const observer = new IntersectionObserver((entries: any) => {
-      entries.forEach((entry: any) => {
-        if (entry.isIntersecting) {
-          this.intersectionQuantity++;
-          // this.getPosts(
-          //   this.intersectionQuantity * 10,
-          //   (this.intersectionQuantity + 1) * 10
-          // );
-          // this.subscription.unsubscribe();
-        }
-      });
-    });
-    observer.observe(this.endOfPosts.nativeElement);
-  }
-
-  getPosts(start: number, offset: number) {
-    this.loading = true;
-    this.subscription = this.getPostsS
-      .getPostsSegmented(start, offset)
-      .subscribe((data) => {
-        this.posts.push(data);
-        this.sortPosts();
-        this.loading = false;
-      });
+    if (window.innerWidth > 1400) this.colsAsIterable = [1, 2, 3];
+    else if (window.innerWidth <= 1400 && window.innerWidth > 1000)
+      this.colsAsIterable = [1, 2];
+    else this.colsAsIterable = [1];
   }
 
   sortPosts() {

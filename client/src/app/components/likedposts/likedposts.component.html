@@ -10,21 +10,8 @@
     </app-post>
   </article>
 
-  <mat-progress-spinner
-    *ngIf="loading"
-    color="#475677"
-    mode="indeterminate"
-    [diameter]="80"
-    style="
-      position: absolute;
-      left: 50%;
-      transform: 'translateX(-50%)';
-      margin-top: 40px;
-    "
-  >
-  </mat-progress-spinner>
-
   <div class="no-posts" *ngIf="!likedPosts || likedPosts.length === 0">
     No liked posts yet
   </div>
 </section>
+<app-loader *ngIf="loading"></app-loader>

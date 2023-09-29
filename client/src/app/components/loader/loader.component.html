@@ -1,0 +1,8 @@
+<section class="loader-grid">
+  <article class="loader-column" *ngFor="let col of colsAsIterable; index as i">
+    <div
+      class="box"
+      *ngFor="let box of boxes | masonry : colsAsIterable.length : i + 1"
+    ></div>
+  </article>
+</section>

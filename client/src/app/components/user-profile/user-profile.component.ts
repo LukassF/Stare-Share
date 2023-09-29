@@ -56,7 +56,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private getUserS: GetusersService,
     private currentUserS: CurrentuserService,
     private router: Router
-  ) {}
+  ) {
+    if (window.innerWidth > 1400) this.colsAsIterable = [1, 2, 3];
+    else if (window.innerWidth <= 1400 && window.innerWidth > 1000)
+      this.colsAsIterable = [1, 2];
+    else this.colsAsIterable = [1];
+  }
 
   get liked() {
     return this.createPostS.likedPosts.value;
@@ -95,14 +100,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   getUserInfo(id: number) {
-    this.userInfo$ = this.getUserS
-      .getOneUser(id)
-      .pipe(
-        map((item) => ({
-          ...item[0],
-          liked: item[0].liked.split(',').length - 1,
-        }))
-      );
+    this.userInfo$ = this.getUserS.getOneUser(id).pipe(
+      map((item) => ({
+        ...item[0],
+        liked: item[0].liked.split(',').length - 1,
+      }))
+    );
   }
 
   toggleShowLiked(): void {

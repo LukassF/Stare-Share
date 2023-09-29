@@ -11,7 +11,6 @@
       </app-post>
     </article>
   </div>
-  <div #endOfPosts></div>
 
   <div *ngIf="(!posts || posts.length === 0) && !loading">
     <h2>No posts yet, add some or come back later!</h2>
@@ -25,17 +24,5 @@
       deleniti vitae.</span
     >
   </div>
-  <mat-progress-spinner
-    *ngIf="loading"
-    color="#475677"
-    mode="indeterminate"
-    [diameter]="80"
-    style="
-      position: absolute;
-      left: 45%;
-      transform: 'translateX(-50%)';
-      margin-top: 40px;
-    "
-  >
-  </mat-progress-spinner>
+  <app-loader *ngIf="loading"></app-loader>
 </section>

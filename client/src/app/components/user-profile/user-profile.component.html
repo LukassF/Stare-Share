@@ -26,39 +26,27 @@
     Show liked
   </button>
 </span>
-<section *ngIf="!showLiked && userPosts" class="user-posts-grid">
-  <article
-    class="user-posts-column"
-    *ngFor="let col of colsAsIterable; index as i"
-  >
-    <app-post
-      *ngFor="let post of userPosts | masonry : colsAsIterable.length : i + 1"
-      [post]="post"
+<main>
+  <section *ngIf="!showLiked && userPosts" class="user-posts-grid">
+    <article
+      class="user-posts-column"
+      *ngFor="let col of colsAsIterable; index as i"
     >
-    </app-post>
-  </article>
+      <app-post
+        *ngFor="let post of userPosts | masonry : colsAsIterable.length : i + 1"
+        [post]="post"
+      >
+      </app-post>
+    </article>
 
-  <mat-progress-spinner
-    *ngIf="loading"
-    color="#475677"
-    mode="indeterminate"
-    [diameter]="80"
-    style="
-      position: absolute;
-      left: 50%;
-      transform: 'translateX(-50%)';
-      margin-top: 40px;
-    "
-  >
-  </mat-progress-spinner>
-
-  <div *ngIf="!userPosts || userPosts.length === 0" class="no-posts">
-    No posts yet
-  </div>
-</section>
-
-<app-likedposts
-  [liked]="liked"
-  *ngIf="showLiked"
-  [colsAsIterable]="colsAsIterable"
-></app-likedposts>
+    <div *ngIf="!userPosts || userPosts.length === 0" class="no-posts">
+      No posts yet
+    </div>
+  </section>
+  <app-loader *ngIf="loading"></app-loader>
+  <app-likedposts
+    [liked]="liked"
+    *ngIf="showLiked"
+    [colsAsIterable]="colsAsIterable"
+  ></app-likedposts>
+</main>

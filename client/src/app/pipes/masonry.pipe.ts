@@ -4,11 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'masonry',
 })
 export class MasonryPipe implements PipeTransform {
-  transform(
-    value: Post[] | null,
-    numColumns: number,
-    colNum: number
-  ): Post[] | undefined {
+  transform(value: any, numColumns: number, colNum: number): any {
     if (!value) return;
     if (value.length === 0) return value;
     if (
@@ -21,7 +17,7 @@ export class MasonryPipe implements PipeTransform {
       console.error('Invalid column configuration');
       return value;
     }
-    return value.filter((val, index) => {
+    return value.filter((val: any, index: number) => {
       return index % numColumns === colNum - 1;
     });
   }
