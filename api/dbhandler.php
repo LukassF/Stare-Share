@@ -2,10 +2,15 @@
 
 class DBH
 {
+
     private $host = "localhost";
     private $dbname = "testdb";
     private $dbusername = 'root';
     private $dbpassword = '';
+    // private $host = "sql101.infinityfree.com";
+    // private $dbname = "if0_35132336_sociallyawkward";
+    // private $dbusername = '	if0_35132336';
+    // private $dbpassword = 't4OWRy8h4L8y9Rl';
 
     protected function connect()
     {
