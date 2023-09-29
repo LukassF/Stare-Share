@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-export const BACKEND_URL = 'http://socially-awkward.free.nfvert/api/';
+export const BACKEND_URL = 'http://socially-awkward.free.nf/api/';
 
 @Injectable({
   providedIn: 'root',
