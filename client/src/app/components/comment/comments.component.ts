@@ -10,7 +10,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CommentService } from 'src/app/services/comment/comment.service';
 import { CurrentuserService } from 'src/app/services/currentUser/currentuser.service';
-import pusherJs from 'pusher-js';
 
 @Component({
   selector: 'app-comments',
