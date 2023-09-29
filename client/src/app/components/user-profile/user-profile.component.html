@@ -6,13 +6,13 @@
     <p>
       Since {{ (userInfo$ | async)?.register_date?.toString()?.slice(0, 4) }}
     </p>
-    <div>
+    <div class="credentials">
       <h1>{{ (userInfo$ | async)?.username }}</h1>
       <h3>{{ (userInfo$ | async)?.email }}</h3>
     </div>
     <span>
       <div><i class="fa fa-image"></i>{{ (userInfo$ | async)?.posts }}</div>
-      <div><i class="fa fa-heart"></i>{{ (userInfo$ | async)?.liked }}</div>
+      <div><i class="far fa-heart"></i>{{ (userInfo$ | async)?.liked }}</div>
     </span>
   </article>
 </header>
@@ -23,7 +23,7 @@
     {{ showLiked ? "liked posts" : "posts" }}
   </h3>
   <button *ngIf="isMine" (click)="toggleShowLiked()" [class.active]="showLiked">
-    Show liked
+    {{ showLiked ? "Show posts" : "Show liked" }}
   </button>
 </span>
 <main>

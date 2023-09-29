@@ -37,6 +37,10 @@ footer {
 
       &.social {
         @include flex(row, space-between, center);
+
+        @media screen and (max-width: 750px) {
+          @include flex(row, space-around, center);
+        }
       }
 
       &.contact {
