@@ -61,11 +61,23 @@
     width: 100%;
   }
 
+  .image-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  }
+
   .post-panel {
+    bottom: 0;
+    left: 0;
+    position: absolute;
     padding: 15px;
 
     span {
-      color: rgb(78, 78, 78);
+      color: rgb(255, 255, 255);
       font-size: 0.9em;
       display: -webkit-box;
       width: 100%;
@@ -80,7 +92,7 @@
     }
 
     a {
-      color: grey;
+      color: rgb(185, 184, 184);
       font-size: 0.8em;
       cursor: pointer;
       @media screen and (max-width: 600px) {
@@ -103,7 +115,7 @@
       button {
         &:disabled {
           cursor: default;
-          color: rgb(192, 188, 188);
+          color: rgb(218, 218, 218);
         }
 
         @media screen and (max-width: 600px) {
@@ -113,7 +125,7 @@
         border: none;
         @include flex(row, center, center);
         gap: 5px;
-        color: rgb(51, 51, 51);
+        color: rgb(202, 201, 201);
         cursor: pointer;
       }
     }

@@ -8,6 +8,7 @@
   </div>
 
   <img [src]="post.base64" alt="post-image" />
+  <div class="image-overlay"></div>
   <div class="post-panel">
     <span [style.display]="showMore ? 'block' : '-webkit-box'">{{
       post.description
@@ -21,12 +22,12 @@
         <i
           [style.color]="
             !currentUserS.currentUser.value
-              ? 'rgb(192, 188, 188)'
+              ? 'rgb(100,100,100)'
               : isLiked
               ? 'red'
               : isMine
-              ? ' color: rgb(192, 188, 188)'
-              : 'rgb(51, 51, 51)'
+              ? 'rgb(100,100,100)'
+              : 'rgb(218, 218, 218)'
           "
           [ngClass]="!isLiked ? 'far fa-heart' : 'fa fa-heart'"
         ></i
